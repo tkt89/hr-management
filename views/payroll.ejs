@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR System - Payroll</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include('_header') %>
+
+    <main class="dashboard">
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">Finance</p>
+          <h2>Payroll overview</h2>
+        </div>
+        <button class="primary-btn">Run payroll</button>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <p>Total payroll</p>
+            <h3>$<%= totalSalary%> </h3>
+          <span class="trend up">↑ 4.8% this month</span>
+        </article>
+        <article class="stat-card">
+          <p>Paid this cycle</p>
+          <h3>6 / 7</h3>
+          <span class="trend">1 pending</span>
+        </article>
+        <article class="stat-card">
+          <p>Advances</p>
+          <h3>1</h3>
+          <span class="trend">Needs review</span>
+        </article>
+        <article class="stat-card">
+          <p>Bonuses</p>
+          <h3>$23K</h3>
+          <span class="trend">Quarterly</span>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel panel-large">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Payroll</p>
+              <h3>Salary breakdown</h3>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Base</th>
+                  <th>Commission</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% salaries.forEach(salary => { %>
+                  <tr>
+                    <td><%= salary.employee_name%></td>
+                    <td>$<%= salary.current_salary%></td>
+                    <td>$<%= salary.commission%></td>
+                    <td><span class="pill active"><%= salary.paid === 1 ? 'paid' : 'pending' %></span></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Notes</p>
+              <h3>Upcoming actions</h3>
+            </div>
+          </div>
+          <div class="attendance-stack">
+            <div><span>Tax updates</span><strong>2</strong></div>
+            <div><span>Reimbursements</span><strong>5</strong></div>
+            <div><span>Advance approvals</span><strong>1</strong></div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

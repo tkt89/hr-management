@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR System - Reports</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include('_header') %>
+
+    <main class="dashboard">
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">Analytics</p>
+          <h2>Performance reports</h2>
+        </div>
+        <button class="primary-btn">Export report</button>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <p>Hiring efficiency</p>
+          <h3>91%</h3>
+          <span class="trend up">↑ 6.4% vs last month</span>
+        </article>
+        <article class="stat-card">
+          <p>Retention rate</p>
+          <h3>94.2%</h3>
+          <span class="trend up">↑ 1.1%</span>
+        </article>
+        <article class="stat-card">
+          <p>Avg. attendance</p>
+          <h3>96.8%</h3>
+          <span class="trend">This quarter</span>
+        </article>
+        <article class="stat-card">
+          <p>Open actions</p>
+          <h3>12</h3>
+          <span class="trend">2 urgent</span>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel panel-large">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Overview</p>
+              <h3>Monthly trends</h3>
+            </div>
+          </div>
+          <div class="department-list">
+            <div><span>New hires</span><strong>18</strong></div>
+            <div><span>Promotions</span><strong>4</strong></div>
+            <div><span>Resignations</span><strong>2</strong></div>
+            <div><span>Payroll changes</span><strong>7</strong></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Highlights</p>
+              <h3>Top departments</h3>
+            </div>
+          </div>
+          <div class="attendance-stack">
+            <div><span>Engineering</span><strong>98%</strong></div>
+            <div><span>Sales</span><strong>95%</strong></div>
+            <div><span>HR</span><strong>93%</strong></div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

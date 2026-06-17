@@ -136,6 +136,17 @@ INSERT INTO recruits (recruit_name, date_of_birth, gender, phone_number, email_a
 
 
 --@block
+ALTER TABLE salaries
+ADD  employee_name VARCHAR(255);
+ADD FOREIGN KEY(employee_name) REFERENCES employees(employee_name);
+ALTER TABLE employees
+ADD department_name VARCHAR(255)
+ADD UNIQUE(employee_name)
+ADD FOREIGN KEY(deparment_name) REFERENCES departments(department_name);
+
+ALTER TABLE departments
+ADD UNIQUE(department_name)
+--@block
 SELECT 
     e.employee_id,
     e.employee_name,

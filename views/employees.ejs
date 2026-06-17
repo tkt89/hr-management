@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR System - Employees</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include('_header') %>
+
+    <main class="dashboard">
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">Directory</p>
+          <h2>Employee records</h2>
+        </div>
+        <button class="primary-btn">Add employee</button>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <p>Active staff</p>
+          <h3><%= employees.length %></h3>
+          <span class="trend up">↑ 2 new hires</span>
+        </article>
+        <article class="stat-card">
+          <p>Managers</p>
+          <h3>3</h3>
+          <span class="trend">Leadership team</span>
+        </article>
+        <article class="stat-card">
+          <p>Remote</p>
+          <h3>1</h3>
+          <span class="trend">Flexible work</span>
+        </article>
+        <article class="stat-card">
+          <p>Upcoming reviews</p>
+          <h3>4</h3>
+          <span class="trend">This week</span>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel panel-large">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">People</p>
+              <h3>Employee list</h3>
+            </div>
+            <a href="#">Filter</a>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Department ID</th>
+                  <th>Location</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% employees.forEach(employee => { %>
+                  <tr>
+                    <td><%= employee.employee_name %></td>
+                    <td><%= employee.role %></td>
+                    <td><%= employee.department_id %></td>
+                    <td><%= employee.location %></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Support</p>
+              <h3>Quick actions</h3>
+            </div>
+          </div>
+          <div class="attendance-stack">
+            <div><span>Profile updates</span><strong>3</strong></div>
+            <div><span>Pending approvals</span><strong>2</strong></div>
+            <div><span>Emergency contacts</span><strong>7</strong></div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

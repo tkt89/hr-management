@@ -1,0 +1,37 @@
+<header class="topbar">
+  <nav class="nav-shell">
+    <div class="brand">
+      <div class="brand-icon">H</div>
+      <div>
+        <p class="eyebrow">Workspace</p>
+        <h1>HR System</h1>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="/" class="<%= path === '/' ? 'active' : '' %>">Overview</a>
+      <a href="/employees" class="<%= path === '/employees' ? 'active' : '' %>"
+        >Employees</a
+      >
+      <a href="/payroll" class="<%= path === '/payroll' ? 'active' : '' %>"
+        >Payroll</a
+      >
+      <a
+        href="/recruitment"
+        class="<%= path === '/recruitment' ? 'active' : '' %>"
+        >Recruitment</a
+      >
+      <a href="/reports" class="<%= path === '/reports' ? 'active' : '' %>"
+        >Reports</a
+      >
+    </div>
+
+    <div class="nav-actions">
+      <button class="ghost-btn">Today</button>
+      <div class="profile-pill">
+        <span class="profile-dot"></span>
+        Alice Smith
+      </div>
+    </div>
+  </nav>
+</header>

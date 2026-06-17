@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR System - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include('_header') %>
+
+    <main class="dashboard">
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">Welcome back</p>
+          <h2>People operations at a glance</h2>
+        </div>
+        <button class="primary-btn">+ New hire</button>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <p>Total Employees</p>
+          <h3>7</h3>
+          <span class="trend up">↑ 3.2% this month</span>
+        </article>
+        <article class="stat-card">
+          <p>Departments</p>
+          <h3>3</h3>
+          <span class="trend">Across 3 locations</span>
+        </article>
+        <article class="stat-card">
+          <p>Recruitment</p>
+          <h3>2</h3>
+          <span class="trend up">1 hired this week</span>
+        </article>
+        <article class="stat-card">
+          <p>Avg. Salary</p>
+          <h3>$82K</h3>
+          <span class="trend">Based on active staff</span>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel panel-large">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Staff directory</p>
+              <h3>Employees</h3>
+            </div>
+            <a href="#">View all</a>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Department ID</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+            <% employees.forEach(employee => { %>
+                <tr>
+                  <td><%= employee.employee_name %></td>
+                  <td><%= employee.department_id %></td>
+                  <td><%= employee.role %></td>
+                  <td><span class="pill active">Active</span></td>
+                </tr>
+            <% }); %>
+
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Teams</p>
+              <h3>Department summary</h3>
+            </div>
+          </div>
+          <div class="department-list">
+            <div>
+              <span>Human Resources</span>
+              <strong>2</strong>
+            </div>
+            <div>
+              <span>Engineering</span>
+              <strong>3</strong>
+            </div>
+            <div>
+              <span>Sales</span>
+              <strong>2</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Attendance</p>
+              <h3>Today</h3>
+            </div>
+          </div>
+          <div class="attendance-stack">
+            <div>
+              <span>On time</span>
+              <strong>5</strong>
+            </div>
+            <div>
+              <span>Late</span>
+              <strong>1</strong>
+            </div>
+            <div>
+              <span>Remote</span>
+              <strong>1</strong>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
