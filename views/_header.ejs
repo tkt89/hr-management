@@ -30,8 +30,9 @@
       <button class="ghost-btn">Today</button>
       <div class="profile-pill">
         <span class="profile-dot"></span>
-        Alice Smith
+        <span class="profile-name"><%= user ? user.id : 'Guest' %></span>
       </div>
+      <button class="ghost-btn">Log out</button>
     </div>
   </nav>
 </header>

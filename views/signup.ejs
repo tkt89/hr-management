@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR System - Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="log-body">
+    <main class="auth-page">
+      <section class="auth-card">
+        <div class="auth-copy">
+          <p class="eyebrow">Join the team</p>
+          <h2>Create your HR workspace account</h2>
+          <p class="auth-text">
+            Get instant access to employee records, hiring pipelines, and
+            payroll insight.
+          </p>
+
+          <div class="auth-highlights">
+            <div>
+              <strong>Fast</strong>
+              <span>onboarding</span>
+            </div>
+            <div>
+              <strong>Secure</strong>
+              <span>protected access</span>
+            </div>
+            <div>
+              <strong>Shared</strong>
+              <span>team visibility</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="auth-form" action="/signup" method="POST">
+          <h3>Create account</h3>
+          <div class="input-group">
+            <label for="name">Full name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Alex Morgan"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="email">Work email</label>
+            <input
+              id="email"
+              name="newEmail"
+              type="email"
+              placeholder="alex@company.com"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="rawPassword"
+              type="password"
+              placeholder="Create a password"
+            />
+          </div>
+
+          <button class="primary-btn auth-submit" type="submit">
+            Create account
+          </button>
+
+          <p class="auth-switch">
+            Already have an account?
+            <a href="/login">Log in</a>
+          </p>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

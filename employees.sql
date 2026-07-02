@@ -146,6 +146,18 @@ ADD FOREIGN KEY(deparment_name) REFERENCES departments(department_name);
 
 ALTER TABLE departments
 ADD UNIQUE(department_name)
+
+--@block
+ALTER TABLE login
+ADD name VARCHAR(255) UNIQUE NOT NULL;
+
+--@block
+CREATE TABLE login (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
 --@block
 SELECT 
     e.employee_id,
