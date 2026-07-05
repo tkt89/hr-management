@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR System - Add Employee</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="auth-card">
+        <div class="auth-copy">
+          <a class = "primary-btn" href="/employees">&#8592; Back</a><br>
+          <p class="eyebrow">Employee onboarding</p>
+          <h2>Add a new team member</h2>
+          <p class="auth-text">
+            Capture the employee profile details needed for the HR records,
+            department placement, and location assignment.
+          </p>
+          <div class="auth-highlights">
+            <div>
+              <strong>10+</strong>
+              <span>Profile fields</span>
+            </div>
+            <div>
+              <strong>3</strong>
+              <span>Departments</span>
+            </div>
+            <div>
+              <strong>1</strong>
+              <span>Location setup</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="auth-form" action="" method="post">
+          <h3>Employee details</h3>
+
+          <div class="input-group">
+            <label for="employee_name">Employee Name</label>
+            <input
+              type="text"
+              id="employee_name"
+              name="employee_name"
+              placeholder="Enter full name"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input
+              type="date"
+              id="date_of_birth"
+              name="date_of_birth"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="phone_number">Phone Number</label>
+            <input
+              type="tel"
+              id="phone_number"
+              name="phone_number"
+              placeholder="+254 712345678"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="email_address">Email Address</label>
+            <input
+              type="email"
+              id="email_address"
+              name="email_address"
+              placeholder="name@company.com"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="home_address">Home Address</label>
+            <input
+              type="text"
+              id="home_address"
+              name="home_address"
+              placeholder="Street, City"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="department_id">Department ID</label>
+            <input
+              type="number"
+              id="department_id"
+              name="department_id"
+              placeholder="1, 2, or 3"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="date_joined">Date Joined</label>
+            <input type="date" id="date_joined" name="date_joined" required />
+          </div>
+
+          <div class="input-group">
+            <label for="role">Role</label>
+            <input
+              type="text"
+              id="role"
+              name="role"
+              placeholder="e.g. Senior Frontend Engineer"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="location">Location</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="Headquarters, Tech Hub..."
+              required
+            />
+          </div>
+
+          <button type="submit" class="primary-btn auth-submit">
+            Add New Employee
+          </button>
+
+          <% if (typeof error !== 'undefined' && error) { %>
+            <p style="color: red"><%= error %></p>
+          <% } %>
+
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

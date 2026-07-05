@@ -27,7 +27,7 @@
       <section class="stats-grid">
         <article class="stat-card">
           <p>Total payroll</p>
-            <h3>$<%= totalSalary%> </h3>
+            <h3>Ksh <%= totalSalaries%> </h3>
           <span class="trend up">↑ 4.8% this month</span>
         </article>
         <article class="stat-card">
@@ -42,7 +42,7 @@
         </article>
         <article class="stat-card">
           <p>Bonuses</p>
-          <h3>$23K</h3>
+          <h3>Ksh 23K</h3>
           <span class="trend">Quarterly</span>
         </article>
       </section>
@@ -62,6 +62,7 @@
                   <th>Employee</th>
                   <th>Base</th>
                   <th>Commission</th>
+                  <th>Total Salary</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -69,9 +70,14 @@
                 <% salaries.forEach(salary => { %>
                   <tr>
                     <td><%= salary.employee_name%></td>
-                    <td>$<%= salary.current_salary%></td>
-                    <td>$<%= salary.commission%></td>
-                    <td><span class="pill active"><%= salary.paid === 1 ? 'paid' : 'pending' %></span></td>
+                    <td>Ksh <%= salary.current_salary.toLocaleString()%></td>
+                    <td>Ksh <%= salary.commission.toLocaleString()%></td>
+                    <td>Ksh <%= totalSalary.toLocaleString();%></td>
+                    <% if (salary.paid == 0) { %>
+                      <td><span class="pill">Pending</span></td>
+                    <% } else if (salary.paid == 1) { %>
+                      <td><span class="pill active">Paid</span></td>
+                    <% } %>
                   </tr>
                 <% }); %>
               </tbody>

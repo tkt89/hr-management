@@ -155,20 +155,99 @@ app.get("/employees", (req, res) => {
   });
 });
 
+app.get("/employees/Add-Employee", (req, res) => {
+  if (!res.locals.user) {
+    return res.redirect("/login");
+  }
+
+  res.render("addemployee.ejs");
+});
+
+app.post("/employees/Add-Employee", (req, res) => {
+  const {
+    employee_name,
+    date_of_birth,
+    gender,
+    phone_number,
+    email_address,
+    home_address,
+    department_id,
+    date_joined,
+    role,
+    location,
+  } = req.body;
+
+  const sql =
+    "INSERT INTO employees (employee_name, date_of_birth, gender, phone_number, email_address, home_address, department_id, date_joined, role, location) VALUES(?,?,?,?,?,?,?,?,?,?)";
+
+  const values = [
+    employee_name,
+    date_of_birth,
+    gender,
+    phone_number,
+    email_address,
+    home_address,
+    department_id,
+    date_joined,
+    role,
+    location,
+  ];
+
+  dbConnection.query(sql, values, (err, results) => {
+    if (err) {
+      return res.render("addemployee", {
+        error: "An Error Occured While adding Employee",
+      });
+    }
+    res.redirect("/employees");
+  });
+});
+
 app.get("/payroll", (req, res) => {
-  dbConnection.query("SELECT * FROM salaries", (err, salaries) => {
+  if (!res.locals.user) {
+    return res.redirect("/login");
+  }
+
+  const sql = `
+    SELECT 
+      s.salary_id,
+      s.employee_id,
+      e.employee_name,
+      s.current_salary,
+      s.previous_salary,
+      s.commission,
+      (s.current_salary + IFNULL(s.commission, 0)) AS total_compensation,
+      s.advance,
+      s.reason_for_advance,
+      s.paid
+    FROM salaries s
+    JOIN employees e ON s.employee_id = e.employee_id
+  `;
+
+  dbConnection.query(sql, (err, salaries) => {
     if (err) {
       console.error("Error fetching payroll:", err);
       return res.status(500).send("Error fetching payroll");
     }
 
-    const totalSalary = salaries.reduce((sum, s) => sum + s.current_salary, 0);
+    const totalSalary = salaries.reduce(
+      (sum, s) => sum + s.current_salary + (s.commission || 0),
+      0,
+    );
 
-    res.render("payroll", { salaries, totalSalary });
+    const totalSalaries = salaries
+      .reduce((sum, s) => sum + totalSalary, 0)
+      .toLocaleString();
+
+    res.render("payroll", { salaries, totalSalaries, totalSalary });
   });
 });
 
 app.get("/recruitment", (req, res) => {
+  if (!res.locals.user) {
+    return res.redirect("/login");
+  }
+
   dbConnection.query("SELECT * FROM recruits", (err, recruits) => {
     if (err) {
       console.error("Error fetching recruitment candidates:", err);
@@ -179,7 +258,18 @@ app.get("/recruitment", (req, res) => {
 });
 
 app.get("/reports", (req, res) => {
+  if (!res.locals.user) {
+    return res.redirect("/login");
+  }
+
   res.render("reports.ejs", { user: req.session.user });
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie("connect.sid");
+    res.redirect("/login");
+  });
 });
 
 app.listen(port, () => {

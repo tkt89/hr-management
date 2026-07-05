@@ -137,7 +137,9 @@ INSERT INTO recruits (recruit_name, date_of_birth, gender, phone_number, email_a
 
 --@block
 ALTER TABLE salaries
-ADD  employee_name VARCHAR(255);
+DROP  FOEIGN KEY ;
+
+--@block
 ADD FOREIGN KEY(employee_name) REFERENCES employees(employee_name);
 ALTER TABLE employees
 ADD department_name VARCHAR(255)
