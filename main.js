@@ -141,6 +141,7 @@ app.get("/", (req, res) => {
 
 app.get("/employees", (req, res) => {
   const user = req.session.user;
+  const location = "Remote";
 
   if (!user) {
     return res.redirect("/login");
@@ -151,7 +152,25 @@ app.get("/employees", (req, res) => {
       console.error("Error fetching employees:", err);
       return res.status(500).send("Error fetching employees");
     }
-    res.render("employees.ejs", { employees, user });
+
+    dbConnection.query(
+      `SELECT * FROM employees WHERE location = ?`,
+      [location],
+      (err, remote) => {
+        if (err) {
+          console.error("Error fetching remote:", err);
+          return res.status(500).send("Error fetching remote");
+        }
+
+        dbConnection.query("SELECT * FROM departments", (err, departments) => {
+          if (err) {
+            console.error("Error fetching departments:", err);
+            return res.status(500).send("Error fetching departments");
+          }
+          res.render("employees.ejs", { employees, departments, remote, user });
+        });
+      },
+    );
   });
 });
 
@@ -264,6 +283,42 @@ app.get("/reports", (req, res) => {
 
   res.render("reports.ejs", { user: req.session.user });
 });
+
+app.get("/salaries/updatepayroll", (req, res) => {
+  const salaryId = req.query.salary_id;
+
+  const listSql = `
+    SELECT s.salary_id, e.employee_name 
+    FROM salaries s
+    JOIN employees e ON s.employee_id = e.employee_id
+  `;
+
+  dbConnection.query(listSql, (err, salaries) => {
+    if (err) return res.status(500).send("Error fetching salaries");
+
+    if (!salaryId) {
+      return res.render("updatepayroll", { salaries, selectedSalary: null });
+    }
+
+    const selectedSql = `
+      SELECT s.*, e.employee_name 
+      FROM salaries s
+      JOIN employees e ON s.employee_id = e.employee_id
+      WHERE s.salary_id = ?
+    `;
+
+    dbConnection.query(selectedSql, [salaryId], (err, results) => {
+      if (err) return res.status(500).send("Error fetching salary");
+
+      res.render("updatepayroll", {
+        salaries,
+        selectedSalary: results[0] || null,
+      });
+    });
+  });
+});
+
+app.post("/salaries/updatepayroll", (req, res) => {});
 
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {

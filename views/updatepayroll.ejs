@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR System - Update Payroll</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="auth-card">
+        <div class="auth-copy">
+          <a class="primary-btn" href="/payroll">&#8592; Back</a>
+          <p class="eyebrow">Payroll update</p>
+          <h2>Update salary details</h2>
+          <p class="auth-text">
+            Pick a payroll record and save the salary, commission, advance,
+            and paid status details for the selected employee.
+          </p>
+
+          <div class="auth-highlights">
+            <div>
+              <strong><%= salaries ? salaries.length : 0 %></strong>
+              <span>Payroll records</span>
+            </div>
+            <div>
+              <strong><%= selectedSalary ? selectedSalary.employee_name : 'None' %></strong>
+              <span>Selected employee</span>
+            </div>
+            <div>
+              <strong><%= selectedSalary ? (selectedSalary.paid ? 'Paid' : 'Pending') : '—' %></strong>
+              <span>Status</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="auth-form" action="/salaries/updatepayroll" method="post">
+          <h3>Payroll record</h3>
+
+          <div class="input-group">
+            <label for="salary_id">Select record</label>
+            <select
+              id="salary_id"
+              name="salary_id"
+              onchange="if (this.value) window.location='/salaries/updatepayroll?salary_id=' + this.value"
+              required
+            >
+              <% if (salaries && salaries.length) { %>
+                <% salaries.forEach((salary) => { %>
+                  <option
+                    value="<%= salary.salary_id %>"
+                    <%= selectedSalary && selectedSalary.salary_id === salary.salary_id ? 'selected' : '' %>
+                  >
+                    <%= salary.employee_name %> — salary #<%= salary.salary_id %>
+                  </option>
+                <% }); %>
+              <% } else { %>
+                <option value="">No payroll records found</option>
+              <% } %>
+            </select>
+          </div>
+
+          <input type="hidden" name="salary_id" value="<%= selectedSalary ? selectedSalary.salary_id : '' %>" />
+
+          <div class="input-group">
+            <label for="employee_name">Employee name</label>
+            <input
+              type="text"
+              id="employee_name"
+              name="employee_name"
+              value="<%= selectedSalary ? selectedSalary.employee_name : '' %>"
+              readonly
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="current_salary">Current salary</label>
+            <input
+              type="number"
+              id="current_salary"
+              name="current_salary"
+              value="<%= selectedSalary ? selectedSalary.current_salary : '' %>"
+              placeholder="Enter current salary"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="previous_salary">Previous salary</label>
+            <input
+              type="number"
+              id="previous_salary"
+              name="previous_salary"
+              value="<%= selectedSalary ? selectedSalary.previous_salary : '' %>"
+              placeholder="Enter previous salary"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="commission">Commission</label>
+            <input
+              type="number"
+              id="commission"
+              name="commission"
+              value="<%= selectedSalary ? selectedSalary.commission : '0' %>"
+              placeholder="Enter commission amount"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="advance">Advance taken</label>
+            <select id="advance" name="advance">
+              <option value="0" <%= selectedSalary && !selectedSalary.advance ? 'selected' : '' %>>No</option>
+              <option value="1" <%= selectedSalary && selectedSalary.advance ? 'selected' : '' %>>Yes</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="reason_for_advance">Reason for advance</label>
+            <input
+              type="text"
+              id="reason_for_advance"
+              name="reason_for_advance"
+              value="<%= selectedSalary ? selectedSalary.reason_for_advance || '' : '' %>"
+              placeholder="Optional advance reason"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="paid">Paid status</label>
+            <select id="paid" name="paid">
+              <option value="0" <%= selectedSalary && !selectedSalary.paid ? 'selected' : '' %>>Pending</option>
+              <option value="1" <%= selectedSalary && selectedSalary.paid ? 'selected' : '' %>>Paid</option>
+            </select>
+          </div>
+
+          <button type="submit" class="primary-btn auth-submit">
+            Save payroll updates
+          </button>
+
+          <% if (typeof error !== 'undefined' && error) { %>
+            <p style="color: red"><%= error %></p>
+          <% } %>
+
+          <% if (typeof message !== 'undefined' && message) { %>
+            <p style="color: green"><%= message %></p>
+          <% } %>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

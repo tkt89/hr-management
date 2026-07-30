@@ -191,7 +191,7 @@ a {
 }
 
 .primary-btn {
-  background: linear-gradient(135deg, #3d6bff, #6c6bff);
+  background-color: #3d6bff;
   color: #fff;
   border-radius: 14px;
   padding: 12px 18px;

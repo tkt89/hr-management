@@ -136,6 +136,9 @@ INSERT INTO recruits (recruit_name, date_of_birth, gender, phone_number, email_a
 
 
 --@block
+SELECT * FROM employees WHERE location = "Remote";
+
+--@block
 ALTER TABLE salaries
 DROP  FOEIGN KEY ;
 
